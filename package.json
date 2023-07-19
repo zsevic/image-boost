@@ -1,0 +1,53 @@
+{
+  "name": "electron-starter",
+  "productName": "Electron Starter",
+  "version": "1.0.22",
+  "description": "Electron starter",
+  "main": "main/index.js",
+  "scripts": {
+    "build": "tsc && next build renderer",
+    "dev": "tsc && electron .",
+    "format": "prettier --write \"{electron,renderer}/**/*.{ts,tsx}\"",
+    "lint": "eslint {electron,renderer}/**/*.{ts,tsx}",
+    "lint:fix": "npm run lint -- --fix",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "prepublish": "npm run build",
+    "publish": "electron-forge publish"
+  },
+  "keywords": [],
+  "author": "Zeljko Sevic",
+  "license": "ISC",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.2.1",
+    "@electron-forge/maker-deb": "^6.2.1",
+    "@electron-forge/maker-rpm": "^6.2.1",
+    "@electron-forge/maker-squirrel": "^6.2.1",
+    "@electron-forge/maker-zip": "^6.2.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.2.1",
+    "@electron-forge/publisher-github": "^6.2.1",
+    "@types/node": "^20.4.2",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "electron": "^25.3.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard-with-typescript": "^36.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "next": "^13.4.10",
+    "prettier": "^3.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "electron-log": "^5.0.0-beta.24",
+    "electron-next": "^3.1.5",
+    "electron-squirrel-startup": "^1.0.0"
+  }
+}
