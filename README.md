@@ -1,6 +1,6 @@
-# electron-starter
+# image-boost
 
-> Minimal Electron boilerplate
+> AI Bulk Image Upscaler
 
 - Configured TypeScript with Next.js for renderer
 
@@ -25,8 +25,8 @@
 ### Local setup
 
 ```bash
-git clone https://github.com/delimitertech/electron-starter
-cd electron-starter
+git clone https://github.com/zsevic/image-boost
+cd image-boost
 npm i
 npm run dev
 ```

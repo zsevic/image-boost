@@ -1,8 +1,8 @@
 {
-  "name": "electron-starter",
-  "productName": "Electron Starter",
+  "name": "image-boost",
+  "productName": "Image Boost",
   "version": "1.0.22",
-  "description": "Electron starter",
+  "description": "AI Bulk Image Upscaler",
   "main": "main/index.js",
   "scripts": {
     "build": "tsc && next build renderer",

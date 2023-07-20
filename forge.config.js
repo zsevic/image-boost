@@ -7,26 +7,26 @@ module.exports = {
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        bin: 'Electron Starter',
+        bin: 'Image Boost',
       },
     },
     {
       name: '@electron-forge/maker-zip',
       config: {
-        bin: 'Electron Starter',
+        bin: 'Image Boost',
       },
       platforms: ['darwin'],
     },
     {
       name: '@electron-forge/maker-deb',
       config: {
-        bin: 'Electron Starter',
+        bin: 'Image Boost',
       },
     },
     {
       name: '@electron-forge/maker-rpm',
       config: {
-        bin: 'Electron Starter',
+        bin: 'Image Boost',
       },
     },
   ],
@@ -41,8 +41,8 @@ module.exports = {
       name: '@electron-forge/publisher-github',
       config: {
         repository: {
-          owner: 'delimitertech',
-          name: 'electron-starter',
+          owner: 'zsevic',
+          name: 'image-boost',
         },
         prerelease: true,
       },
