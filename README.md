@@ -2,7 +2,7 @@
 
 > AI Bulk Image Upscaler
 
-- Configured TypeScript with Next.js for renderer
+- Configured TypeScript with Next.js and Tailwind CSS for renderer
 
   - Main page is in `renderer/pages/index.tsx` file
 
