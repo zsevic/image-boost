@@ -1,10 +1,10 @@
 import { app, BrowserWindow } from 'electron';
-import log from 'electron-log';
+import logger from 'electron-log';
 import prepareRenderer from 'electron-next';
 import { join } from 'path';
 import { format } from 'url';
 
-log.initialize({ preload: true });
+logger.initialize({ preload: true });
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 app.on('ready', async () => {
@@ -31,14 +31,21 @@ app.on('ready', async () => {
       })
     : 'http://localhost:8000';
 
-  await mainWindow.loadURL(url);
-
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
     mainWindow.webContents.setZoomFactor(1);
   });
+
+  mainWindow
+    .loadURL(url)
+    .then((): void => {
+      logger.info('Main window is loaded');
+    })
+    .catch((error): void => {
+      logger.error('Loading main window failed', error);
+    });
 });
 
 app.on('window-all-closed', app.quit);
 
-log.info(`App path: ${app.getAppPath()}`);
+logger.info(`App path: ${app.getAppPath()}`);
