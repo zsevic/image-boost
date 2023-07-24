@@ -101,6 +101,7 @@ const Home = () => {
       <div className="flex flex-col mb-4">
         <button
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
+          // eslint-disable-next-line
           onClick={selectFolderHandler}
         >
           Select Folder

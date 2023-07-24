@@ -7,9 +7,6 @@ module.exports = {
   extends: ['standard-with-typescript', 'plugin:react/recommended', 'prettier'],
   overrides: [
     {
-      env: {
-        node: true,
-      },
       files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
         sourceType: 'script',

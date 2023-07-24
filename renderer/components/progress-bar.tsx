@@ -1,5 +1,4 @@
 import React from 'react';
-import Spinner from './icons/spinner';
 
 // eslint-disable-next-line
 function ProgressBar({ progress, stopHandler }) {
