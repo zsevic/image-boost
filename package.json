@@ -12,6 +12,7 @@
     "lint:fix": "npm run lint -- --fix",
     "start": "electron-forge start",
     "package": "electron-forge package",
+    "premake": "npm run build",
     "make": "electron-forge make",
     "prepublish": "npm run build",
     "publish": "electron-forge publish"
