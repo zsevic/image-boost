@@ -31,9 +31,7 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
       config: {
         bin: 'Image Boost',
-        options: {
-          icon: './main/build/icon.png',
-        },
+        icon: './main/build/icon.png',
       },
     },
   ],
