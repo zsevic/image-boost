@@ -134,7 +134,7 @@ const Home = () => {
         )}
         {upscaledBatchFolderPath.length > 0 && (
           <div className="pt-20 text-center">
-            <p className="select-none py-4 font-bold text-50">
+            <p className="select-none py-4 font-bold text-3xl text-green-500">
               Upscaling is finished!
             </p>
             <button
