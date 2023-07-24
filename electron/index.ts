@@ -34,7 +34,6 @@ app.on('ready', async () => {
     show: false,
     webPreferences: {
       preload: join(__dirname, 'preload.js'),
-      webSecurity: false,
     },
   });
 
