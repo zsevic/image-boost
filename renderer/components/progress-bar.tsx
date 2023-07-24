@@ -4,15 +4,15 @@ import Spinner from './icons/spinner';
 // eslint-disable-next-line
 function ProgressBar({ progress, stopHandler }) {
   return (
-    <div className="absolute flex h-full w-full flex-col items-center justify-center bg-base-300/50 backdrop-blur-lg">
-      <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center justify-center bg-base-300/50">
+      <div className="flex flex-col items-center gap-2 mt-4">
         <p className="rounded-full bg-base-300 px-2 py-1 font-bold">
           {progress}
         </p>
-        <p className="rounded-full bg-base-300 px-2 py-1 text-sm font-medium">
-          Doing the ImageBoost magic...
-        </p>
-        <button onClick={stopHandler} className="btn-primary btn">
+        <button
+          onClick={stopHandler}
+          className="bg-red-500 text-white font-bold p-2 mb-4 rounded"
+        >
           STOP
         </button>
       </div>

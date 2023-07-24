@@ -139,7 +139,7 @@ const Home = () => {
               Upscaling is finished!
             </p>
             <button
-              className="bg-blue-500 text-white font-bold px-4 rounded"
+              className="bg-blue-500 text-white font-bold p-2 rounded"
               onClick={openFolderHandler}
             >
               Open Upscaled Folder
