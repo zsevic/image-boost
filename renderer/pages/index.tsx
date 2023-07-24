@@ -90,9 +90,11 @@ const Home = () => {
   return (
     <div className="container mx-auto mt-10 max-w-md">
       <h1 className="text-3xl font-bold mb-6">Image Boost</h1>
+      <p className="mb-2">
+        Please select a folder containing images to upscale
+      </p>
       <p className="mb-4">
-        Please select a folder containing images to upscale, it shouldn&apos;t
-        contain anything except PNG, JPG, JPEG and WEBP images
+        It shouldn&apos;t contain anything except PNG, JPG, JPEG and WEBP images
       </p>
       <div className="flex flex-col mb-4">
         <button

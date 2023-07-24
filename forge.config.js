@@ -1,6 +1,7 @@
 module.exports = {
   packagerConfig: {
     asar: true,
+    icon: './main/build/icon',
   },
   rebuildConfig: {},
   makers: [
@@ -21,6 +22,7 @@ module.exports = {
       name: '@electron-forge/maker-deb',
       config: {
         bin: 'Image Boost',
+        icon: './main/build/icon.png',
       },
     },
     {
