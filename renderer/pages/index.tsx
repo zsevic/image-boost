@@ -1,19 +1,16 @@
-import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
-import { scaleAtom } from '../atoms/user-settings-atom';
 import commands from '../../electron/commands';
 import ProgressBar from '../components/progress-bar';
 
 // eslint-disable-next-line
 const Home = () => {
   const [outputPath, setOutputPath] = useState('');
-  const [scaleFactor] = useState(4);
+  const [scaleFactor] = useState('4');
   const [progress, setProgress] = useState('');
   const [model] = useState('realesrgan-x4plus-anime');
   const [batchFolderPath, setBatchFolderPath] = useState('');
   const [upscaledBatchFolderPath, setUpscaledBatchFolderPath] = useState('');
   const [saveImageAs] = useState('png');
-  const [scale] = useAtom(scaleAtom);
 
   useEffect(() => {
     const handleErrors = (data: string): void => {
@@ -79,7 +76,6 @@ const Home = () => {
         model,
         gpuId: null,
         saveImageAs,
-        scale,
       });
     } else {
       alert('Please select a folder with images to upscale');

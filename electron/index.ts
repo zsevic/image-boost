@@ -68,8 +68,6 @@ logger.info(`App path: ${app.getAppPath()}`);
 let folderPath: string | undefined;
 const defaultModels = ['realesrgan-x4plus-anime'];
 let customModelsFolderPath: string | undefined;
-let outputFolderPath: string | undefined;
-let saveOutputFolder;
 let stopped = false;
 
 ipcMain.handle(commands.SELECT_FOLDER, async () => {
@@ -106,19 +104,11 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
   const model = payload.model;
   const gpuId = payload.gpuId;
   const saveImageAs = payload.saveImageAs;
-  const scale = payload.scale as string;
+  const scale = payload.scaleFactor as string;
 
   const inputDir = payload.batchFolderPath;
 
-  let outputDir: string = payload.outputPath;
-
-  if (
-    saveOutputFolder !== '' &&
-    outputFolderPath !== undefined &&
-    outputFolderPath !== ''
-  ) {
-    outputDir = outputFolderPath;
-  }
+  const outputDir: string = payload.outputPath;
 
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
