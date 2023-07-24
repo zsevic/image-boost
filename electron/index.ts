@@ -65,11 +65,6 @@ app.on('window-all-closed', app.quit);
 
 logger.info(`App path: ${app.getAppPath()}`);
 
-const logit = (...args: any): void => {
-  logger.log(...args);
-  mainWindow.webContents.send(commands.LOG, args.join(' '));
-};
-
 let folderPath: string | undefined;
 const defaultModels = ['realesrgan-x4plus-anime'];
 let customModelsFolderPath: string | undefined;

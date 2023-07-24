@@ -1,7 +1,6 @@
 import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { scaleAtom } from '../atoms/user-settings-atom';
-import useLog from '../components/hooks/use-log';
 import commands from '../../electron/commands';
 import ProgressBar from '../components/progress-bar';
 
@@ -15,8 +14,6 @@ const Home = () => {
   const [upscaledBatchFolderPath, setUpscaledBatchFolderPath] = useState('');
   const [saveImageAs] = useState('png');
   const [scale] = useAtom(scaleAtom);
-
-  const { logit } = useLog();
 
   useEffect(() => {
     const handleErrors = (data: string): void => {
@@ -32,10 +29,6 @@ const Home = () => {
         resetImagePaths();
       }
     };
-
-    window.electron.on(commands.LOG, (_, data: string) => {
-      logit(`🐞 BACKEND REPORTED: ${data}`);
-    });
 
     window.electron.on(commands.FOLDER_UPSCALE_PROGRESS, (_, data: string) => {
       if (data.length > 0 && data.length < 10) {
