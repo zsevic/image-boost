@@ -133,12 +133,12 @@ const Home = () => {
           </p>
         )}
         {upscaledBatchFolderPath.length > 0 && (
-          <div className="pt-20 text-center">
+          <div className="pt-8 text-center">
             <p className="select-none py-4 font-bold text-3xl text-green-500">
               Upscaling is finished!
             </p>
             <button
-              className="bg-blue-500 text-white font-bold p-2 rounded"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
               onClick={openFolderHandler}
             >
               Open Upscaled Folder
