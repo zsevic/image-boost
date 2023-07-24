@@ -1,5 +1,12 @@
 import { type ChildProcessWithoutNullStreams } from 'child_process';
-import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  dialog,
+  ipcMain,
+  type MessageBoxOptions,
+  shell,
+} from 'electron';
 import logger from 'electron-log';
 import prepareRenderer from 'electron-next';
 import fs from 'fs';
@@ -78,8 +85,23 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
   if (canceled) {
     return null;
   } else {
-    folderPath = folderPaths[0];
-    return folderPaths[0];
+    const [selectedFolder] = folderPaths;
+
+    const inputDirFiles = await glob(selectedFolder + '/**/*.*');
+    const filesGlob = await glob(selectedFolder + '/**/*.{png,jpg,jpeg,webp}');
+    if (inputDirFiles.length - filesGlob.length !== 0) {
+      const options: MessageBoxOptions = {
+        type: 'error',
+        title: 'Folder contains invalid files',
+        message:
+          "The selected folder should contain only '.png', '.jpg', '.jpeg' and '.webp' files.",
+      };
+      dialog.showMessageBoxSync(mainWindow, options);
+      return null;
+    }
+
+    folderPath = selectedFolder;
+    return selectedFolder;
   }
 });
 
@@ -98,12 +120,12 @@ ipcMain.on(commands.STOP, () => {
 
 // eslint-disable-next-line
 ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
+  const inputDir = payload.batchFolderPath as string;
+
   const model = payload.model;
   const gpuId = payload.gpuId;
   const saveImageAs = payload.saveImageAs;
   const scale = payload.scaleFactor as string;
-
-  const inputDir = payload.batchFolderPath;
 
   const outputDir: string = payload.outputPath;
 
