@@ -22,13 +22,18 @@ module.exports = {
       name: '@electron-forge/maker-deb',
       config: {
         bin: 'Image Boost',
-        icon: './main/build/icon.png',
+        options: {
+          icon: './main/build/icon.png',
+        },
       },
     },
     {
       name: '@electron-forge/maker-rpm',
       config: {
         bin: 'Image Boost',
+        options: {
+          icon: './main/build/icon.png',
+        },
       },
     },
   ],
