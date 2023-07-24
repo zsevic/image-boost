@@ -4,3 +4,4 @@ node_modules
 renderer/.next
 renderer/out
 main/*.js
+out
