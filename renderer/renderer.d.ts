@@ -1,4 +1,4 @@
-import type { IpcRenderer } from "electron";
+import type { IpcRenderer } from 'electron';
 
 export interface IElectronAPI {
   on: (command, func?) => IpcRenderer;
