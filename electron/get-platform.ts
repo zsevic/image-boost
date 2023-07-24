@@ -1,5 +1,3 @@
-'use strict';
-
 import { platform } from 'os';
 
 const getPlatform = (): string => {
