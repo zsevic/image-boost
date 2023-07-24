@@ -66,7 +66,6 @@ app.on('window-all-closed', app.quit);
 logger.info(`App path: ${app.getAppPath()}`);
 
 let folderPath: string | undefined;
-const defaultModels = ['realesrgan-x4plus-anime'];
 let stopped = false;
 
 ipcMain.handle(commands.SELECT_FOLDER, async () => {
@@ -93,9 +92,7 @@ ipcMain.on(commands.OPEN_FOLDER, (_, payload) => {
 ipcMain.on(commands.STOP, () => {
   stopped = true;
 
-  childProcesses.forEach((child) => {
-    child.kill();
-  });
+  childProcesses.forEach((child) => child.kill());
 });
 
 // eslint-disable-next-line
@@ -144,6 +141,7 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
       failed = true;
     }
   };
+
   const onError = (data: any): void => {
     mainWindow.webContents.send(
       commands.FOLDER_UPSCALE_PROGRESS,
@@ -151,16 +149,17 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
     );
     failed = true;
   };
+
   const onClose = (): void => {
     if (!failed && !stopped) {
       mainWindow.webContents.send(commands.FOLDER_UPSCALE_DONE, outputDir);
     }
   };
 
-  const convertToJpg = async (filePath): Promise<void> => {
+  const convertToJpg = async (filePath: string): Promise<void> => {
     const [file] = filePath.split('.');
     const image = await Jimp.read(filePath);
-    image.write(`${file as string}.jpg`);
+    image.write(`${file}.jpg`);
   };
 
   const onExit = async (): Promise<void> => {
