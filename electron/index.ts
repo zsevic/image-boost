@@ -89,8 +89,8 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
   const [selectedFolder] = folderPaths;
 
   const inputDirFiles = await glob(selectedFolder + '/**/*.*');
-  const filesGlob = await glob(selectedFolder + '/**/*.{png,jpg,jpeg,webp}');
-  if (inputDirFiles.length - filesGlob.length !== 0) {
+  const imagesGlob = await glob(selectedFolder + '/**/*.{png,jpg,jpeg,webp}');
+  if (inputDirFiles.length - imagesGlob.length !== 0) {
     const options: MessageBoxOptions = {
       type: 'error',
       title: 'Folder contains invalid files',
@@ -102,7 +102,7 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
   }
 
   folderPath = selectedFolder;
-  return selectedFolder;
+  return [selectedFolder, imagesGlob.length];
 });
 
 ipcMain.on(commands.OPEN_FOLDER, (_, payload) => {

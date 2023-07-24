@@ -11,6 +11,9 @@ const Home = () => {
   const [batchFolderPath, setBatchFolderPath] = useState('');
   const [upscaledBatchFolderPath, setUpscaledBatchFolderPath] = useState('');
   const [saveImageAs] = useState('png');
+  const [numberOfImagesForUpscaling, setNumberOfImagesForUpscaling] =
+    useState(0);
+  const [numberOfUpscaledImages, setNumberOfUpscaledImages] = useState(0);
 
   useEffect(() => {
     const handleErrors = (data: string): void => {
@@ -50,14 +53,19 @@ const Home = () => {
   const selectFolderHandler = async (): Promise<void> => {
     resetImagePaths();
 
-    const path: string = await window.electron.invoke(commands.SELECT_FOLDER);
+    const folderInfo = await window.electron.invoke(commands.SELECT_FOLDER);
 
-    if (path !== null) {
+    if (folderInfo !== null) {
+      const [path, numberOfImages] = folderInfo;
+      setNumberOfImagesForUpscaling(numberOfImages);
+      setNumberOfUpscaledImages(0);
       setBatchFolderPath(path);
-      setOutputPath(`${path}_upscaled`);
+      setOutputPath(`${path as string}_upscaled`);
     } else {
       setBatchFolderPath('');
       setOutputPath('');
+      setNumberOfUpscaledImages(0);
+      setNumberOfImagesForUpscaling(0);
     }
   };
 
@@ -125,7 +133,12 @@ const Home = () => {
           </button>
         )}
         {progress.length > 0 && upscaledBatchFolderPath.length === 0 ? (
-          <ProgressBar progress={progress} stopHandler={stopHandler} />
+          <ProgressBar
+            progress={progress}
+            numberOfUpscaledImages={numberOfUpscaledImages}
+            numberOfImagesForUpscaling={numberOfImagesForUpscaling}
+            stopHandler={stopHandler}
+          />
         ) : null}
         {upscaledBatchFolderPath.length === 0 && batchFolderPath.length > 0 && (
           <p className="text-sm text-gray-600 mb-4">
