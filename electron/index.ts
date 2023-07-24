@@ -67,7 +67,6 @@ logger.info(`App path: ${app.getAppPath()}`);
 
 let folderPath: string | undefined;
 const defaultModels = ['realesrgan-x4plus-anime'];
-let customModelsFolderPath: string | undefined;
 let stopped = false;
 
 ipcMain.handle(commands.SELECT_FOLDER, async () => {
@@ -114,14 +113,12 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  const isDefaultModel = defaultModels.includes(model);
-
   const upscaler = spawnUpscale(
     'realesrgan',
     getBatchArguments(
       inputDir,
       outputDir,
-      isDefaultModel ? modelsPath : customModelsFolderPath ?? modelsPath,
+      modelsPath,
       model,
       gpuId,
       saveImageAs,
