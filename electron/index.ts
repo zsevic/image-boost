@@ -84,25 +84,25 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
 
   if (canceled) {
     return null;
-  } else {
-    const [selectedFolder] = folderPaths;
-
-    const inputDirFiles = await glob(selectedFolder + '/**/*.*');
-    const filesGlob = await glob(selectedFolder + '/**/*.{png,jpg,jpeg,webp}');
-    if (inputDirFiles.length - filesGlob.length !== 0) {
-      const options: MessageBoxOptions = {
-        type: 'error',
-        title: 'Folder contains invalid files',
-        message:
-          "The selected folder should contain only '.png', '.jpg', '.jpeg' and '.webp' files.",
-      };
-      dialog.showMessageBoxSync(mainWindow, options);
-      return null;
-    }
-
-    folderPath = selectedFolder;
-    return selectedFolder;
   }
+
+  const [selectedFolder] = folderPaths;
+
+  const inputDirFiles = await glob(selectedFolder + '/**/*.*');
+  const filesGlob = await glob(selectedFolder + '/**/*.{png,jpg,jpeg,webp}');
+  if (inputDirFiles.length - filesGlob.length !== 0) {
+    const options: MessageBoxOptions = {
+      type: 'error',
+      title: 'Folder contains invalid files',
+      message:
+        "The selected folder should contain only '.png', '.jpg', '.jpeg' and '.webp' files.",
+    };
+    dialog.showMessageBoxSync(mainWindow, options);
+    return null;
+  }
+
+  folderPath = selectedFolder;
+  return selectedFolder;
 });
 
 ipcMain.on(commands.OPEN_FOLDER, (_, payload) => {
