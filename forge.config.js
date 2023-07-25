@@ -1,7 +1,7 @@
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: './main/build/icon',
+    icon: process.resourcesPath + '/resources/icon',
     extraResource: ['resources'],
   },
   rebuildConfig: {},
@@ -24,7 +24,7 @@ module.exports = {
       config: {
         bin: 'Image Boost',
         options: {
-          icon: './main/build/icon.png',
+          icon: process.resourcesPath + '/resources/icon.png',
         },
       },
     },
@@ -32,7 +32,7 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
       config: {
         bin: 'Image Boost',
-        icon: './main/build/icon.png',
+        icon: process.resourcesPath + '/resources/icon.png',
       },
     },
   ],
