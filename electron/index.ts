@@ -90,8 +90,10 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
   const selectedFolderPosix = selectedFolder.replace(/\\/g, '/');
 
   const inputDirFiles = await glob(selectedFolderPosix + '/**/*.*');
-  const imagesFiles = await glob(selectedFolderPosix + '/**/*.{png,jpg,jpeg,webp}');
-    if (inputDirFiles.length === 0 && imagesFiles.length === 0) {
+  const imagesFiles = await glob(
+    selectedFolderPosix + '/**/*.{png,jpg,jpeg,webp}',
+  );
+  if (inputDirFiles.length === 0 && imagesFiles.length === 0) {
     const options: MessageBoxOptions = {
       type: 'error',
       title: 'Folder is empty',
