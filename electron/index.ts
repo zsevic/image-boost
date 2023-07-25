@@ -20,6 +20,8 @@ import commands from './commands';
 import { spawnUpscale } from './upscale';
 import { getBatchArguments } from './utils';
 
+if (require('electron-squirrel-startup') === true) app.quit();
+
 logger.initialize({ preload: true });
 
 const childProcesses: Array<{
