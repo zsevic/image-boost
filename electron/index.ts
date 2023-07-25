@@ -34,8 +34,8 @@ app.on('ready', async () => {
 
   mainWindow = new BrowserWindow({
     icon: join(__dirname, 'build', 'icon.png'),
-    width: 600,
-    height: 600,
+    width: 650,
+    height: 650,
     minWidth: 500,
     minHeight: 500,
     show: false,
@@ -87,10 +87,11 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
   }
 
   const [selectedFolder] = folderPaths;
+  const selectedFolderPosix = selectedFolder.replace(/\\/g, '/');
 
-  const inputDirFiles = await glob(selectedFolder + '/**/*.*');
-  const imagesGlob = await glob(selectedFolder + '/**/*.{png,jpg,jpeg,webp}');
-    if (inputDirFiles.length === 0 && imagesGlob.length === 0) {
+  const inputDirFiles = await glob(selectedFolderPosix + '/**/*.*');
+  const imagesFiles = await glob(selectedFolderPosix + '/**/*.{png,jpg,jpeg,webp}');
+    if (inputDirFiles.length === 0 && imagesFiles.length === 0) {
     const options: MessageBoxOptions = {
       type: 'error',
       title: 'Folder is empty',
@@ -99,7 +100,7 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
     dialog.showMessageBoxSync(mainWindow, options);
     return null;
   }
-  if (inputDirFiles.length - imagesGlob.length !== 0) {
+  if (inputDirFiles.length - imagesFiles.length !== 0) {
     const options: MessageBoxOptions = {
       type: 'error',
       title: 'Folder contains invalid files',
@@ -111,7 +112,7 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
   }
 
   folderPath = selectedFolder;
-  return [selectedFolder, imagesGlob.length];
+  return [selectedFolder, imagesFiles.length];
 });
 
 ipcMain.on(commands.OPEN_FOLDER, (_, payload) => {

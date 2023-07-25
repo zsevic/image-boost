@@ -111,7 +111,7 @@ const Home = () => {
       </p>
       <div className="flex flex-col mb-4">
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2 mx-5"
           // eslint-disable-next-line
           onClick={selectFolderHandler}
         >
@@ -130,7 +130,7 @@ const Home = () => {
 
         {upscaledBatchFolderPath.length === 0 && batchFolderPath.length > 0 && (
           <button
-            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mb-2"
+            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mb-2 mx-5"
             onClick={upscaleHandler}
             disabled={progress.length > 0}
           >
