@@ -1,4 +1,5 @@
 import React from 'react';
+import { getNumberWithOrdinal } from '../utils';
 
 interface ProgressBarProps {
   progress: string;
@@ -19,11 +20,17 @@ function ProgressBar(props: ProgressBarProps): React.JSX.Element {
     <div className="flex flex-col items-center justify-center bg-base-300/50">
       <div className="flex flex-col items-center gap-2 mt-4">
         <p className="m-2">
-          {numberOfUpscaledImages} out of {numberOfImagesForUpscaling} images
-          upscaled
+          {progress.includes('%') ? numberOfUpscaledImages : 0} out of{' '}
+          {numberOfImagesForUpscaling} images upscaled
         </p>
         <p className="rounded-full bg-base-300 px-2 py-1 font-bold">
-          {progress}
+          {progress.includes('%')
+            ? `${progress} of ${
+                numberOfUpscaledImages + 1
+              }${getNumberWithOrdinal(
+                numberOfUpscaledImages + 1,
+              )} image finished`
+            : progress}
         </p>
         <button
           onClick={stopHandler}

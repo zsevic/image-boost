@@ -155,7 +155,7 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
     const stringifiedData: string = data.toString();
     mainWindow.webContents.send(
       commands.FOLDER_UPSCALE_PROGRESS,
-      data.toString(),
+      stringifiedData,
     );
     if (
       stringifiedData.includes('invalid gpu') ||

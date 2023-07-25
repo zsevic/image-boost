@@ -13,7 +13,7 @@ const Home = () => {
   const [saveImageAs] = useState('png');
   const [numberOfImagesForUpscaling, setNumberOfImagesForUpscaling] =
     useState(0);
-  const [numberOfUpscaledImages, setNumberOfUpscaledImages] = useState(0);
+  const [numberOfUpscaledImages, setNumberOfUpscaledImages] = useState(-1);
 
   useEffect(() => {
     const handleErrors = (data: string): void => {
@@ -48,7 +48,14 @@ const Home = () => {
 
     setBatchFolderPath('');
     setUpscaledBatchFolderPath('');
+    setNumberOfUpscaledImages(-1);
   };
+
+  useEffect(() => {
+    if (progress.trim() === '0.00%') {
+      setNumberOfUpscaledImages(numberOfUpscaledImages + 1);
+    }
+  }, [progress]);
 
   const selectFolderHandler = async (): Promise<void> => {
     resetImagePaths();
@@ -58,13 +65,11 @@ const Home = () => {
     if (folderInfo !== null) {
       const [path, numberOfImages] = folderInfo;
       setNumberOfImagesForUpscaling(numberOfImages);
-      setNumberOfUpscaledImages(0);
       setBatchFolderPath(path);
       setOutputPath(`${path as string}_upscaled`);
     } else {
       setBatchFolderPath('');
       setOutputPath('');
-      setNumberOfUpscaledImages(0);
       setNumberOfImagesForUpscaling(0);
     }
   };
