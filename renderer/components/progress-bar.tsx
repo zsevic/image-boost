@@ -21,7 +21,8 @@ function ProgressBar(props: ProgressBarProps): React.JSX.Element {
       <div className="flex flex-col items-center gap-2 mt-4">
         <p className="m-2">
           {progress.includes('%') ? numberOfUpscaledImages : 0} out of{' '}
-          {numberOfImagesForUpscaling} images upscaled
+          {numberOfImagesForUpscaling}{' '}
+          {numberOfImagesForUpscaling > 1 ? 'images' : 'image'} upscaled
         </p>
         <p className="rounded-full bg-base-300 px-2 py-1 font-bold">
           {progress.includes('%')
