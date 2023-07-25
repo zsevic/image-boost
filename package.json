@@ -1,7 +1,7 @@
 {
   "name": "image-boost",
   "productName": "Image Boost",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "AI Bulk Image Upscaler",
   "main": "main/index.js",
   "scripts": {
