@@ -90,6 +90,15 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
 
   const inputDirFiles = await glob(selectedFolder + '/**/*.*');
   const imagesGlob = await glob(selectedFolder + '/**/*.{png,jpg,jpeg,webp}');
+    if (inputDirFiles.length === 0 && imagesGlob.length === 0) {
+    const options: MessageBoxOptions = {
+      type: 'error',
+      title: 'Folder is empty',
+      message: "The selected folder doesn't contain any images.",
+    };
+    dialog.showMessageBoxSync(mainWindow, options);
+    return null;
+  }
   if (inputDirFiles.length - imagesGlob.length !== 0) {
     const options: MessageBoxOptions = {
       type: 'error',
