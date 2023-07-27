@@ -13,6 +13,7 @@ const Login = (): React.JSX.Element => {
     event.preventDefault();
 
     try {
+      // TODO update URL
       await request.post('/licenses/verify', {
         email,
         licenseKey,
