@@ -21,7 +21,7 @@ const Login = (): React.JSX.Element => {
       setIsLoggedIn(true);
     } catch (error) {
       if (error?.response?.status === 401) {
-        alert('Login failed');
+        alert('Login failed, please try again');
         setIsLoggedIn(false);
         return;
       }
