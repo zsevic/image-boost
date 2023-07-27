@@ -18,8 +18,8 @@ const Home = (): React.JSX.Element => {
     useState(0);
   const [numberOfUpscaledImages, setNumberOfUpscaledImages] = useState(-1);
   const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
-  const [email] = useAtom(emailAtom);
-  const [licenseKey] = useAtom(licenseKeyAtom);
+  const [email, setEmail] = useAtom(emailAtom);
+  const [licenseKey, setLicenseKey] = useAtom(licenseKeyAtom);
 
   useEffect(() => {
     const handleErrors = (data: string): void => {
@@ -111,6 +111,8 @@ const Home = (): React.JSX.Element => {
         .catch((error) => {
           if (error?.response?.status === 401) {
             setIsLoggedIn(false);
+            setEmail('');
+            setLicenseKey('');
             return;
           }
           console.error(error);
