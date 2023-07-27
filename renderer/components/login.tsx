@@ -1,12 +1,39 @@
+import { useAtom } from 'jotai';
 import React from 'react';
+import { emailAtom, isLoggedInAtom, licenseKeyAtom } from '../atoms/login-atom';
+import request from '../utils/request';
 
 const Login = (): React.JSX.Element => {
+  const [email, setEmail] = useAtom(emailAtom);
+  const [licenseKey, setLicenseKey] = useAtom(licenseKeyAtom);
+  const [, setIsLoggedIn] = useAtom(isLoggedInAtom);
+
+  // eslint-disable-next-line
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    try {
+      await request.post('/licenses/verify', {
+        email,
+        licenseKey,
+      });
+      setIsLoggedIn(true);
+    } catch (error) {
+      console.error(error);
+      if (error?.response?.status === 401) {
+        setIsLoggedIn(false);
+        setEmail('');
+        setLicenseKey('');
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-md">
         <div className="flex flex-col items-center mb-6">
           <img
-            src="/logo.png" // Replace with the path to your logo image
+            src="/logo.png"
             alt="Image Boost Logo"
             className="w-16 h-16 mb-2"
           />
@@ -26,6 +53,10 @@ const Login = (): React.JSX.Element => {
               name="email"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
               placeholder="Enter your email address"
+              required
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </div>
           <div className="mb-4">
@@ -41,10 +72,15 @@ const Login = (): React.JSX.Element => {
               name="licenseKey"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
               placeholder="Enter your license key"
+              required
+              onChange={(e) => {
+                setLicenseKey(e.target.value);
+              }}
             />
           </div>
           <button
-            type="submit"
+            // eslint-disable-next-line
+            onClick={handleLogin}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none"
           >
             Login

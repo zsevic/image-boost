@@ -1,6 +1,9 @@
+import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
-import commands from '../../electron/commands';
+import { isLoggedInAtom } from '../atoms/login-atom';
 import ProgressBar from '../components/progress-bar';
+import Login from '../components/login';
+import commands from '../../electron/commands';
 
 const Home = (): React.JSX.Element => {
   const [outputPath, setOutputPath] = useState('');
@@ -13,6 +16,7 @@ const Home = (): React.JSX.Element => {
   const [numberOfImagesForUpscaling, setNumberOfImagesForUpscaling] =
     useState(0);
   const [numberOfUpscaledImages, setNumberOfUpscaledImages] = useState(-1);
+  const [isLoggedIn] = useAtom(isLoggedInAtom);
 
   useEffect(() => {
     const handleErrors = (data: string): void => {
@@ -99,7 +103,9 @@ const Home = (): React.JSX.Element => {
     resetImagePaths();
   };
 
-  return (
+  return !isLoggedIn ? (
+    <Login />
+  ) : (
     <div className="container mx-auto mt-10 max-w-md">
       <h1 className="text-3xl font-bold mb-6">Image Boost</h1>
       <p className="mb-2">
