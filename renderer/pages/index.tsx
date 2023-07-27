@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import commands from '../../electron/commands';
 import ProgressBar from '../components/progress-bar';
 
-// eslint-disable-next-line
-const Home = () => {
+const Home = (): React.JSX.Element => {
   const [outputPath, setOutputPath] = useState('');
   const [scaleFactor] = useState('4');
   const [progress, setProgress] = useState('');
