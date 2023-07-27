@@ -1,8 +1,9 @@
 import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
-import { isLoggedInAtom } from '../atoms/login-atom';
+import { emailAtom, isLoggedInAtom, licenseKeyAtom } from '../atoms/login-atom';
 import ProgressBar from '../components/progress-bar';
 import Login from '../components/login';
+import request from '../utils/request';
 import commands from '../../electron/commands';
 
 const Home = (): React.JSX.Element => {
@@ -16,7 +17,9 @@ const Home = (): React.JSX.Element => {
   const [numberOfImagesForUpscaling, setNumberOfImagesForUpscaling] =
     useState(0);
   const [numberOfUpscaledImages, setNumberOfUpscaledImages] = useState(-1);
-  const [isLoggedIn] = useAtom(isLoggedInAtom);
+  const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
+  const [email] = useAtom(emailAtom);
+  const [licenseKey] = useAtom(licenseKeyAtom);
 
   useEffect(() => {
     const handleErrors = (data: string): void => {
@@ -97,6 +100,23 @@ const Home = (): React.JSX.Element => {
       alert('Please select a folder with images to upscale');
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      request
+        .post('/licenses/verify', {
+          email,
+          licenseKey,
+        })
+        .catch((error) => {
+          if (error?.response?.status === 401) {
+            setIsLoggedIn(false);
+            return;
+          }
+          console.error(error);
+        });
+    }
+  }, []);
 
   const stopHandler = (): void => {
     window.electron.send(commands.STOP);

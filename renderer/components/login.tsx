@@ -19,12 +19,12 @@ const Login = (): React.JSX.Element => {
       });
       setIsLoggedIn(true);
     } catch (error) {
-      console.error(error);
       if (error?.response?.status === 401) {
+        alert('Login failed');
         setIsLoggedIn(false);
-        setEmail('');
-        setLicenseKey('');
+        return;
       }
+      console.error(error);
     }
   };
 
