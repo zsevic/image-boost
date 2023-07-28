@@ -19,11 +19,18 @@ const Login = (): React.JSX.Element => {
       });
       setIsLoggedIn(true);
     } catch (error) {
+      if (error?.code === 'NETWORK_ERROR') {
+        alert('Login failed, please check your internet connection');
+        setIsLoggedIn(false);
+        return;
+      }
+
       if (error?.response?.status === 401) {
         alert('Login failed, please try again');
         setIsLoggedIn(false);
         return;
       }
+
       console.error(error);
     }
   };
