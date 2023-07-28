@@ -1,1 +1,4 @@
-export const API_BASE_URL = 'http://localhost:8080'; // TODO update URL
+export const API_BASE_URL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:8080'
+    : 'https://image-boost-server.fly.dev';

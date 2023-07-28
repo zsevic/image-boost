@@ -108,7 +108,12 @@ const Home = (): React.JSX.Element => {
           email,
           licenseKey,
         })
+        .then(() => {})
         .catch((error) => {
+          if (error?.code === 'NETWORK_ERROR') {
+            console.error(error);
+            return;
+          }
           if (error?.response?.status === 401) {
             setIsLoggedIn(false);
             setEmail('');
