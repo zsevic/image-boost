@@ -25,6 +25,12 @@ const Login = (): React.JSX.Element => {
         return;
       }
 
+      if (error?.code === 'ERR_NETWORK') {
+        alert('Login failed, please try again later');
+        setIsLoggedIn(false);
+        return;
+      }
+
       if (error?.response?.status === 401) {
         alert('Login failed, please try again');
         setIsLoggedIn(false);

@@ -1,3 +1,5 @@
+'use client';
+
 import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { emailAtom, isLoggedInAtom, licenseKeyAtom } from '../atoms/login-atom';
