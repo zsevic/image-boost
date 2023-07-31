@@ -140,7 +140,7 @@ const Home = (): React.JSX.Element => {
         Please select a folder containing images to upscale
       </p>
       <p className="mb-4">
-        It shouldn&apos;t contain anything except PNG, JPG, JPEG and WEBP images
+        It should contain only PNG, JPG, JPEG and WEBP images
       </p>
       <div className="flex flex-col mb-4">
         <button
