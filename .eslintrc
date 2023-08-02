@@ -8,6 +8,7 @@
   "extends": [
     "standard-with-typescript",
     "plugin:react/recommended",
+    "plugin:@next/next/recommended",
     "prettier"
   ],
   "overrides": [
@@ -29,5 +30,7 @@
     }
   },
   "plugins": ["react"],
-  "rules": {}
+  "rules": {
+    "@next/next/no-html-link-for-pages": ["warn", "renderer/app"]
+  }
 }

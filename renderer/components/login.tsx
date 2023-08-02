@@ -1,4 +1,5 @@
 import { useAtom } from 'jotai';
+import Image from 'next/image';
 import React from 'react';
 import { emailAtom, isLoggedInAtom, licenseKeyAtom } from '../atoms/login-atom';
 import request from '../utils/request';
@@ -45,7 +46,7 @@ const Login = (): React.JSX.Element => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-md">
         <div className="flex flex-col items-center mb-6">
-          <img
+          <Image
             src="logo.png"
             alt="Image Boost Logo"
             className="w-16 h-16 mb-2"
