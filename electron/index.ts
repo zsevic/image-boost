@@ -200,8 +200,8 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
   };
 
   const onExit = async (): Promise<void> => {
-    const filesGlob = outputDir + '/**/*.png';
-    const files = await glob(filesGlob);
+    const outputDirPosix = outputDir.replace(/\\/g, '/') + '/**/*.png';
+    const files = await glob(outputDirPosix);
     await Promise.all(
       files.map(async (file) => {
         await convertToJpg(file);
