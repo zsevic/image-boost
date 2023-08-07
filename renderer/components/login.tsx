@@ -50,6 +50,8 @@ const Login = (): React.JSX.Element => {
             src="logo.png"
             alt="Image Boost Logo"
             className="w-16 h-16 mb-2"
+            width={16}
+            height={16}
           />
           <h2 className="text-2xl font-bold">Image Boost</h2>
         </div>
