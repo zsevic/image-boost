@@ -196,7 +196,7 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
   const convertToJpg = async (filePath: string): Promise<void> => {
     const [file] = filePath.split('.');
     const image = await Jimp.read(filePath);
-    image.quality(100).write(`${file}.jpeg`);
+    image.quality(100).write(`${file}.jpg`);
   };
 
   const onExit = async (): Promise<void> => {
