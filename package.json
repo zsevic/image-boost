@@ -19,7 +19,7 @@
     "test": "jest"
   },
   "keywords": [],
-  "author": "Zeljko Sevic",
+  "author": "Image Boost AI <info@imageboostai.com> (https://imageboostai.com/)",
   "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^6.2.1",
