@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/electron';
 import { type ChildProcessWithoutNullStreams } from 'child_process';
 import {
   app,
@@ -21,6 +22,10 @@ import { spawnUpscale } from './upscale';
 import { getBatchArguments } from './utils';
 
 if (require('electron-squirrel-startup') === true) app.quit();
+
+Sentry.init({
+  dsn: 'https://21f64d225af042bfa35731a0abd72c82@o390513.ingest.sentry.io/4505589747351552',
+});
 
 logger.initialize({ preload: true });
 

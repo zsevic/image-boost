@@ -56,6 +56,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "@sentry/electron": "^4.9.0",
     "axios": "^1.4.0",
     "electron-log": "^5.0.0-beta.24",
     "electron-next": "^3.1.5",
