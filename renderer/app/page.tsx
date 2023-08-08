@@ -7,6 +7,7 @@ import ProgressBar from '../components/progress-bar';
 import Login from '../components/login';
 import request from '../utils/request';
 import commands from '../../electron/commands';
+import { trackEvent } from '../utils/analytics';
 
 const Home = (): React.JSX.Element => {
   const [outputPath, setOutputPath] = useState('');
@@ -48,6 +49,7 @@ const Home = (): React.JSX.Element => {
     window.electron.on(commands.FOLDER_UPSCALE_DONE, (_, data: string) => {
       setProgress('');
       setUpscaledBatchFolderPath(data);
+      trackEvent('upscale-finished', 'upscale-finished');
     });
   }, []);
 
@@ -75,6 +77,7 @@ const Home = (): React.JSX.Element => {
       setNumberOfImagesForUpscaling(numberOfImages);
       setBatchFolderPath(path);
       setOutputPath(`${path as string}_upscaled`);
+      trackEvent('selected-folder', 'selected-folder');
     } else {
       setBatchFolderPath('');
       setOutputPath('');
@@ -82,8 +85,9 @@ const Home = (): React.JSX.Element => {
     }
   };
 
-  const openFolderHandler = (): void => {
+  const openUpscaledFolderHandler = (): void => {
     window.electron.send(commands.OPEN_FOLDER, upscaledBatchFolderPath);
+    trackEvent('upscale-finished-open-folder', 'upscale-finished-open-folder');
   };
 
   const upscaleHandler = (): void => {
@@ -98,6 +102,7 @@ const Home = (): React.JSX.Element => {
         gpuId: null,
         saveImageAs,
       });
+      trackEvent('upscale-start', 'upscale-start');
     } else {
       alert('Please select a folder with images to upscale');
     }
@@ -131,6 +136,7 @@ const Home = (): React.JSX.Element => {
   const stopHandler = (): void => {
     window.electron.send(commands.STOP);
     resetImagePaths();
+    trackEvent('upscale-stop', 'upscale-stop');
   };
 
   return !isLoggedIn ? (
@@ -192,7 +198,7 @@ const Home = (): React.JSX.Element => {
             </p>
             <button
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              onClick={openFolderHandler}
+              onClick={openUpscaledFolderHandler}
             >
               Open Upscaled Folder
             </button>

@@ -62,7 +62,8 @@
     "electron-squirrel-startup": "^1.0.0",
     "glob": "^10.3.3",
     "jimp": "^0.22.10",
-    "jotai": "^2.2.2"
+    "jotai": "^2.2.2",
+    "react-ga4": "^2.1.0"
   },
   "jest": {
     "moduleDirectories": [
