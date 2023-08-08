@@ -119,7 +119,7 @@ const Home = (): React.JSX.Element => {
           console.log('License verified');
         })
         .catch((error) => {
-          if (error?.code === 'NETWORK_ERROR') {
+          if (error?.code === 'NETWORK_ERROR' || error?.code === 'ERR_NETWORK') {
             return;
           }
           if (error?.response?.status === 401) {
