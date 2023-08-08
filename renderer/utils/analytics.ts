@@ -2,7 +2,7 @@ import ReactGA from "react-ga4";
 import { isEnvironment } from ".";
 import { Environment } from "../common/enums/environment";
 
-export function trackEvent(category: string, label: string, action = 'click') {
+export function trackEvent(category: string, label: string, action = 'click'): void {
   if (!isEnvironment(Environment.Development)) {
     ReactGA.event({
       action,
