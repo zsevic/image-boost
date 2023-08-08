@@ -131,7 +131,7 @@ const Home = (): React.JSX.Element => {
           console.error(error);
         });
     }
-  }, []);
+  }, [isLoggedIn]);
 
   const stopHandler = (): void => {
     window.electron.send(commands.STOP);
