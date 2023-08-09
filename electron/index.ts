@@ -192,12 +192,6 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
     failed = true;
   };
 
-  const onClose = (): void => {
-    if (!failed && !stopped) {
-      mainWindow.webContents.send(commands.FOLDER_UPSCALE_DONE, outputDir);
-    }
-  };
-
   const convertToJpg = async (filePath: string): Promise<void> => {
     const [file] = filePath.split('.');
     const image = await Jimp.read(filePath);
@@ -217,11 +211,14 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
         await unlink(file);
       }),
     );
+
+    if (!failed && !stopped) {
+      mainWindow.webContents.send(commands.FOLDER_UPSCALE_DONE, outputDir);
+    }
   };
 
   upscaler.process.stderr.on('data', onData);
   upscaler.process.on('error', onError);
   // eslint-disable-next-line
   upscaler.process.on('exit', onExit);
-  upscaler.process.on('close', onClose);
 });
