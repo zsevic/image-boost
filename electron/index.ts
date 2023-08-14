@@ -119,7 +119,7 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
       type: 'error',
       title: 'Folder contains invalid files',
       message:
-        'The selected folder should contain only PNG, JPG, JPEG and WEBP images.',
+        'The selected folder should contain only PNG, JPG, JPEG and WEBP images.\nPlease check if there are any hidden files in the selected folder.',
     };
     dialog.showMessageBoxSync(mainWindow, options);
     return null;
