@@ -15,11 +15,10 @@ module.exports = {
       },
     },
     {
-      name: '@electron-forge/maker-zip',
+      name: '@electron-forge/maker-dmg',
       config: {
         bin: 'Image Boost',
       },
-      platforms: ['darwin'],
     },
     {
       name: '@electron-forge/maker-deb',
