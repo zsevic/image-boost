@@ -96,9 +96,14 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
   const [selectedFolder] = folderPaths;
   const selectedFolderPosix = selectedFolder.replace(/\\/g, '/');
 
-  const inputDirFiles = await glob(selectedFolderPosix + '/**/*.*');
+  const inputDirFiles = await glob(selectedFolderPosix + '/**/*.*', {
+    dot: true,
+  });
   const imagesFiles = await glob(
     selectedFolderPosix + '/**/*.{png,jpg,jpeg,webp}',
+    {
+      dot: true,
+    },
   );
   if (inputDirFiles.length === 0 && imagesFiles.length === 0) {
     const options: MessageBoxOptions = {
@@ -114,7 +119,7 @@ ipcMain.handle(commands.SELECT_FOLDER, async () => {
       type: 'error',
       title: 'Folder contains invalid files',
       message:
-        "The selected folder should contain only PNG, JPG, JPEG and WEBP images.",
+        'The selected folder should contain only PNG, JPG, JPEG and WEBP images.',
     };
     dialog.showMessageBoxSync(mainWindow, options);
     return null;
@@ -180,6 +185,7 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
       stringifiedData.includes('invalid gpu') ||
       stringifiedData.includes('failed')
     ) {
+      logger.error('Unexpected error', stringifiedData);
       failed = true;
     }
   };
