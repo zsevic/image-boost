@@ -212,6 +212,10 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
   };
 
   const onExit = async (): Promise<void> => {
+    if (failed || stopped) {
+      return;
+    }
+
     const outputDirPosix = outputDir.replace(/\\/g, '/') + '/**/*.png';
     const files = await glob(outputDirPosix);
     await Promise.all(
