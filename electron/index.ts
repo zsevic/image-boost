@@ -229,9 +229,7 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
       }),
     );
 
-    if (!failed && !stopped) {
-      mainWindow.webContents.send(commands.FOLDER_UPSCALE_DONE, outputDir);
-    }
+    mainWindow.webContents.send(commands.FOLDER_UPSCALE_DONE, outputDir);
   };
 
   upscaler.process.stderr.on('data', onData);
