@@ -202,7 +202,7 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
     mainWindow.webContents.send(
       commands.FOLDER_UPSCALE_ERROR,
       `Error upscaling image. Error: ${stringifiedData}`,
-    )
+    );
   };
 
   const convertToJpg = async (filePath: string): Promise<void> => {
