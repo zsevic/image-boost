@@ -176,6 +176,7 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
   let failed = false;
 
   const onData = (data: any): void => {
+    if (!mainWindow) return;
     const stringifiedData: string = data.toString();
     mainWindow.webContents.send(
       commands.FOLDER_UPSCALE_PROGRESS,
@@ -187,15 +188,22 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
     ) {
       logger.error('Unexpected error', stringifiedData);
       failed = true;
+      upscaler.kill();
     }
   };
 
   const onError = (data: any): void => {
+    if (!mainWindow) return;
     mainWindow.webContents.send(
       commands.FOLDER_UPSCALE_PROGRESS,
       data.toString(),
     );
     failed = true;
+    upscaler.kill();
+    mainWindow.webContents.send(
+      commands.FOLDER_UPSCALE_ERROR,
+      'Error upscaling image. Error: ' + data,
+    )
   };
 
   const convertToJpg = async (filePath: string): Promise<void> => {

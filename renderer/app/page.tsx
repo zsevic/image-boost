@@ -53,6 +53,11 @@ const Home = (): React.JSX.Element => {
       setIsUpscaling(false);
       trackEvent('upscale-finished', 'upscale-finished');
     });
+
+    window.electron.on(commands.FOLDER_UPSCALE_ERROR, (_, data: string) => {
+      alert(data);
+      resetImagePaths();
+    });
   }, []);
 
   const resetImagePaths = (): void => {
