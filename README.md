@@ -2,21 +2,11 @@
 
 > AI Bulk Image Upscaler
 
-- Configured TypeScript with Next.js and Tailwind CSS for renderer
+## App
 
-  - Main page is in `renderer/pages/index.tsx` file
+Latest releases for Windows, MacOS and Linux apps are available [here](https://github.com/zsevic/image-boost/releases)
 
-- Configured TypeScript for Electron main process
-
-- GitHub Action Workflows
-
-  - CI pipeline (build, lint, audit)
-
-  - Manual release for GitHub
-
-- Configured logger
-
-## Getting started
+## Development
 
 ### Prerequisites for release workflow
 
