@@ -1,11 +1,7 @@
 'use client';
 
-import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
-import { emailAtom, isLoggedInAtom, licenseKeyAtom } from '../atoms/login-atom';
 import ProgressBar from '../components/progress-bar';
-import Login from '../components/login';
-import request from '../utils/request';
 import commands from '../../electron/commands';
 import { trackEvent } from '../utils/analytics';
 
@@ -20,9 +16,6 @@ const Home = (): React.JSX.Element => {
   const [numberOfImagesForUpscaling, setNumberOfImagesForUpscaling] =
     useState(0);
   const [numberOfUpscaledImages, setNumberOfUpscaledImages] = useState(-1);
-  const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
-  const [email, setEmail] = useAtom(emailAtom);
-  const [licenseKey, setLicenseKey] = useAtom(licenseKeyAtom);
   const [isUpscaling, setIsUpscaling] = useState(false);
 
   useEffect(() => {
@@ -117,43 +110,13 @@ const Home = (): React.JSX.Element => {
     }
   };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      request
-        .post('/licenses/verify', {
-          email,
-          licenseKey,
-        })
-        .then(() => {
-          console.log('License verified');
-        })
-        .catch((error) => {
-          if (
-            error?.code === 'NETWORK_ERROR' ||
-            error?.code === 'ERR_NETWORK'
-          ) {
-            return;
-          }
-          if (error?.response?.status === 401) {
-            setIsLoggedIn(false);
-            setEmail('');
-            setLicenseKey('');
-            return;
-          }
-          console.error(error);
-        });
-    }
-  }, [isLoggedIn]);
-
   const stopHandler = (): void => {
     window.electron.send(commands.STOP);
     resetImagePaths();
     trackEvent('upscale-stop', 'upscale-stop');
   };
 
-  return !isLoggedIn ? (
-    <Login />
-  ) : (
+  return (
     <div className="container mx-auto mt-10 max-w-md">
       <h1 className="text-3xl font-bold mb-6">Image Boost</h1>
       <p className="mb-2">

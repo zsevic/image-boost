@@ -1,7 +1,6 @@
 'use client';
 
 import '../styles/globals.css';
-import { Provider } from 'jotai';
 import React from 'react';
 import ReactGA4 from 'react-ga4';
 import { Environment } from '../common/enums/environment';
@@ -19,9 +18,7 @@ export default function RootLayout({
 }): React.JSX.Element {
   return (
     <html lang="en">
-      <body>
-        <Provider>{children}</Provider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
