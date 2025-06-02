@@ -4,7 +4,7 @@
 
 ## App
 
-Latest releases for Windows, MacOS and Linux apps are available [here](https://github.com/zsevic/image-boost/tags)
+Latest releases for Windows, MacOS and Linux apps are available [here](https://github.com/zsevic/image-boost/releases)
 
 ## Development
 
