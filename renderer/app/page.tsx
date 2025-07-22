@@ -179,7 +179,7 @@ const Home = (): React.JSX.Element => {
 
         <p className="mb-4">
           {' '}
-          The upscaled images will be saved as JPG images.
+          The upscaled images will be saved as PNG images.
         </p>
 
         {upscaledBatchFolderPath.length === 0 && batchFolderPath.length > 0 && (
