@@ -5,3 +5,5 @@ renderer/.next
 renderer/out
 main/*.js
 out
+
+package-lock.json

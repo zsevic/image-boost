@@ -11,9 +11,7 @@ import {
 import logger from 'electron-log';
 import prepareRenderer from 'electron-next';
 import fs from 'fs';
-import { unlink } from 'fs/promises';
 import { glob } from 'glob';
-import Jimp from 'jimp';
 import { join } from 'path';
 import { format } from 'url';
 import { modelsPath } from './binaries';
@@ -205,29 +203,10 @@ ipcMain.on(commands.FOLDER_UPSCALE, async (_, payload) => {
     );
   };
 
-  const convertToJpg = async (filePath: string): Promise<void> => {
-    const [file] = filePath.split('.');
-    const image = await Jimp.read(filePath);
-    image.quality(100).write(`${file}.jpg`);
-  };
-
   const onExit = async (): Promise<void> => {
     if (failed || stopped) {
       return;
     }
-
-    const outputDirPosix = outputDir.replace(/\\/g, '/') + '/**/*.png';
-    const files = await glob(outputDirPosix);
-    await Promise.all(
-      files.map(async (file) => {
-        await convertToJpg(file);
-      }),
-    );
-    await Promise.all(
-      files.map(async (file) => {
-        await unlink(file);
-      }),
-    );
 
     mainWindow.webContents.send(commands.FOLDER_UPSCALE_DONE, outputDir);
   };
