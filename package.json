@@ -1,7 +1,7 @@
 {
   "name": "image-boost",
   "productName": "Image Boost",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "AI Bulk Image Upscaler",
   "main": "main/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "test": "jest"
   },
   "keywords": [],
-  "author": "Image Boost AI <info@imageboostai.com> (https://imageboostai.com/)",
+  "author": "Sparxno <thenotionspark@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^6.2.1",
